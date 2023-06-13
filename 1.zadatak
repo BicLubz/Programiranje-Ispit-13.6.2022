@@ -17,8 +17,9 @@ int main(){
     
     do{
         scanf("%d",&m);
-    }while( m<9 || m>15 );
-    printf("\n%d",m);
+    }while(m%2!=0 && m<9 && m>15 );
+    
+    printf("\n%d\n",m);
     
     srand((unsigned) time (NULL));
     
@@ -26,7 +27,7 @@ int main(){
         for(j=0;j<m;j++){
             do{
                 a[i][j] = -25 + (float)rand()/RAND_MAX*(25+25);
-            }while(a[i][j]>=-10 || a[i][j]<=5);
+            }while(a[i][j]>=-10 && a[i][j]<=5);
         }
     }
     
