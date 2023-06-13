@@ -1,0 +1,81 @@
+1.Omoguciti korisniku unos dimenzija matrice mxm , gdje je m paran, 8<=m<=14. Popuniti matricu pseudo slucajnim brojevima iz [-25,25] a vrijednosti iz [-10,5] nisu dozvoljene. 
+Pronaci najvecu vrijednost ispod glavne dijagonale te najmanju vrijednost iznad glavne dijagonale. 
+Potom postaviti  elemente ispod sporedne dijagonale na najvecu vrijednsot, a elemente iznad sporedne dijagonale na najmannju vrijednost.
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+int main(){
+    
+    int m;
+    int i,j;
+    int a[14][14];
+    
+    
+    printf("Unesite velicinu dimenzije matrice: ");
+    
+    do{
+        scanf("%d",&m);
+    }while( m<9 || m>15 );
+    printf("\n%d",m);
+    
+    srand((unsigned) time (NULL));
+    
+    for(i=0;i<m;i++){
+        for(j=0;j<m;j++){
+            do{
+                a[i][j] = -25 + (float)rand()/RAND_MAX*(25+25);
+            }while(a[i][j]>=-10 || a[i][j]<=5);
+        }
+    }
+    
+    int max = 0;
+    int min = a[m][m];
+    
+    
+    for(i=0;i<m;i++){
+        for(j=0;j<m;j++){
+            if(i>j){
+                if(a[i][j]>max){
+                    max = a[i][j];
+                }
+            }
+        }
+    }
+    
+    for(i=0;i<m;i++){
+        for(j=0;j<m;j++){
+            if(i<j){
+                if(a[i][j]<min){
+                    min = a[i][j];
+                }
+            }
+        }
+    }
+    
+    for(i=0;i<m;i++){
+        for(j=0;j<m;j++){
+            if(i+j>=m){
+                a[i][j] = max;
+            }
+        }
+    }
+    
+    for(i=0;i<m;i++){
+        for(j=0;j<m;j++){
+            if(i+j<m-1){
+                a[i][j] = min;
+            }
+        }
+    }
+    
+    for(i=0;i<m;i++){
+        for(j=0;j<m;j++){
+            printf("%d ",a[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
